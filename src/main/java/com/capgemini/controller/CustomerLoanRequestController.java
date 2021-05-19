@@ -14,37 +14,41 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.capgemini.entites.CustomerLoanRequest;
 import com.capgemini.exception.CustomerLoanRequestNotFoundException;
-import com.capgemini.service.ICustomerLoanRequestService;
+import com.capgemini.repository.CustomerLoanRequestRepository;
+import com.capgemini.service.CustomerLoanRequestImpl;
 
 @RestController
 @RequestMapping("/api/customerloanrequest/")
 public class CustomerLoanRequestController {
 
 	@Autowired
-	ICustomerLoanRequestService customerLoanRequestService;
+	CustomerLoanRequestImpl customerLoanRequestImpl;
+
+	@Autowired
+	CustomerLoanRequestRepository customerLoanRequestRepository;
 
 	@PostMapping("/addloandetails")
 	public ResponseEntity<String> createloandetails(@RequestBody CustomerLoanRequest customerLoanRequest) {
-		customerLoanRequestService.addCustomerLoanRequest(customerLoanRequest);
+		customerLoanRequestImpl.addCustomerLoanRequest(customerLoanRequest);
 		return new ResponseEntity<>("Added", HttpStatus.OK);
 	}
 
 	@PutMapping("/{customerid}")
 	public ResponseEntity<String> updateloandetails(@PathVariable int customerid,
 			@RequestBody CustomerLoanRequest customerLoanRequest) throws CustomerLoanRequestNotFoundException {
-		customerLoanRequestService.updateCustomerLoanRequest(customerid, customerLoanRequest);
+		customerLoanRequestImpl.updateCustomerLoanRequest(customerid, customerLoanRequest);
 		return new ResponseEntity<>("Updated", HttpStatus.OK);
 	}
 
 	@DeleteMapping("/{customerid}")
 	public ResponseEntity<String> deleteLoandetails(@PathVariable int customerid) {
-		customerLoanRequestService.deleteCustomerLoanRequest(customerid);
+		customerLoanRequestImpl.deleteCustomerLoanRequest(customerid);
 		return new ResponseEntity<>("Deleted", HttpStatus.OK);
 	}
 
 	@GetMapping("/{customerid}")
 	public ResponseEntity<CustomerLoanRequest> findById(@PathVariable int customerid) {
-		CustomerLoanRequest clr = customerLoanRequestService.findById(customerid);
+		CustomerLoanRequest clr = customerLoanRequestImpl.findById(customerid);
 		return new ResponseEntity<CustomerLoanRequest>(clr, HttpStatus.OK);
 	}
 

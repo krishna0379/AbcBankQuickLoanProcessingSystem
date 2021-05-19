@@ -27,7 +27,7 @@ public class ILoanServiceimpl implements ILoanService {
 		ld.setLoantype(loanprogram.getLoantype());
 		loanprogramrepository.save(ld);
 
-		return "Loan_details updated";
+		return "Loan details updated";
 
 	}
 

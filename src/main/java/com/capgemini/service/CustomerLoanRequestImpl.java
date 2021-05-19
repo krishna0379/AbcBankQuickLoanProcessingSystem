@@ -16,7 +16,7 @@ public class CustomerLoanRequestImpl implements ICustomerLoanRequestService {
 	@Override
 	public String addCustomerLoanRequest(CustomerLoanRequest customerLoanRequest) {
 		customerLoanRequestRepository.save(customerLoanRequest);
-		return "CustomerLoanRequest is Added Sucessfully ";
+		return "CustomerLoanRequest is Added Sucessfully";
 	}
 
 	@Override
@@ -29,13 +29,13 @@ public class CustomerLoanRequestImpl implements ICustomerLoanRequestService {
 		ld.setCustomerid(customerLoanRequest.getCustomerid());
 		customerLoanRequestRepository.save(ld);
 
-		return "Customer Details Added!";
+		return "Customer Details Added";
 	}
 
 	@Override
 	public String deleteCustomerLoanRequest(int id) {
-		customerLoanRequestRepository.deleteById(id);
-		return "Record Deleted Sucessfully";
+		 customerLoanRequestRepository.deleteById(id);
+		  return "Record Deleted Sucessfully";
 	}
 
 	@Override
