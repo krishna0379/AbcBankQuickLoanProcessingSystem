@@ -15,4 +15,8 @@ public class GlobalException {
 		return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
 	}
 
+	@ExceptionHandler(value = LoanNotFoundException.class)
+	public ResponseEntity<String> handelException(LoanNotFoundException e) {
+		return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+	}
 }

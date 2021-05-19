@@ -26,7 +26,16 @@ public class CustomerLoanRequestImpl implements ICustomerLoanRequestService {
 		}
 
 		CustomerLoanRequest ld = customerLoanRequestRepository.findById(id).get();
-		ld.setCustomerid(customerLoanRequest.getCustomerid());
+		/*
+		 * ld.setCustomerid(customerLoanRequest.getCustomerid());
+		 * ld.setLoantype(customerLoanRequest.getLoantype());
+		 * ld.setMobile(customerLoanRequest.getMobile());
+		 * ld.setAnnualincome(customerLoanRequest.getAnnualincome());
+		 * ld.setName(customerLoanRequest.getName());
+		 */
+		if (customerLoanRequest.getCity() != null) {
+			ld.setCity(customerLoanRequest.getCity());
+		}
 		customerLoanRequestRepository.save(ld);
 
 		return "Customer Details Added";
@@ -34,8 +43,11 @@ public class CustomerLoanRequestImpl implements ICustomerLoanRequestService {
 
 	@Override
 	public String deleteCustomerLoanRequest(int id) {
-		 customerLoanRequestRepository.deleteById(id);
-		  return "Record Deleted Sucessfully";
+		if (!customerLoanRequestRepository.existsById(id)) {
+			throw new CustomerLoanRequestNotFoundException("The id is not Avaible..!!");
+		}
+		customerLoanRequestRepository.deleteById(id);
+		return "Record Deleted Sucessfully";
 	}
 
 	@Override
