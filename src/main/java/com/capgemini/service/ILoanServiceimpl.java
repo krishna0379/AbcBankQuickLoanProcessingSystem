@@ -25,7 +25,9 @@ public class ILoanServiceimpl implements ILoanService {
 			throw new LoanNotFoundException("Check the id and Try again");
 		}
 		LoanProgram ld = loanprogramrepository.findById(loanid).get();
-		ld.setLoantype(loanprogram.getLoantype());
+		ld.setLoanType(loanprogram.getLoanType());
+		ld.setMaximumAge(loanprogram.getMaximumAge());
+		ld.setMinimumAge(loanprogram.getMinimumAge());
 		loanprogramrepository.save(ld);
 
 		return "Loan details updated";
@@ -39,6 +41,15 @@ public class ILoanServiceimpl implements ILoanService {
 		}
 		loanprogramrepository.deleteById(loanid);
 		return "Record deleted";
+	}
+
+	@Override
+	public LoanProgram findById(int id) {
+		if (!loanprogramrepository.existsById(id)) {
+			throw new LoanNotFoundException(" Loan program Not Found");
+		}
+		LoanProgram ls = loanprogramrepository.findById(id).get();
+		return ls;
 	}
 
 }

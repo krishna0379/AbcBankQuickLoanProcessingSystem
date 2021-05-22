@@ -12,9 +12,9 @@ import lombok.Data;
 public class LoanStatus {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int statusid;
-	private double customerrefid;
-	private String customerloantype;
-	private double loanamount;
+	private int statusId;
+	private double customerRefId;
+	private String customerLoanType;
+	private double loanAmount;
 	private double emi;
 }

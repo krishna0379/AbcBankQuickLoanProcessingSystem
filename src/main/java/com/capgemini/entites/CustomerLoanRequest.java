@@ -12,17 +12,17 @@ import lombok.Data;
 public class CustomerLoanRequest {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int customerid;
+	private int id;
 	private double age;
-	private double annualincome;
-	private String loantype;
+	private double annualIncome;
+	private String loanType;
 	private String name;
 	private String email;
 	private String mobile;
 	private String gender;
 	private String city;
 	private String state;
-	private String pannumber;
+	private String panNumber;
 	private String nationality;
 	
 	

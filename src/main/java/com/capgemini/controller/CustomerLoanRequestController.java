@@ -14,41 +14,37 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.capgemini.entites.CustomerLoanRequest;
 import com.capgemini.exception.CustomerLoanRequestNotFoundException;
-import com.capgemini.repository.CustomerLoanRequestRepository;
-import com.capgemini.service.CustomerLoanRequestImpl;
+import com.capgemini.service.ICustomerLoanRequestService;
 
 @RestController
 @RequestMapping("/api/customerloanrequest/")
 public class CustomerLoanRequestController {
 
 	@Autowired
-	CustomerLoanRequestImpl customerLoanRequestImpl;
-
-	@Autowired
-	CustomerLoanRequestRepository customerLoanRequestRepository;
+	ICustomerLoanRequestService icustomerloanrequestservice;
 
 	@PostMapping("/addloandetails")
 	public ResponseEntity<String> createloandetails(@RequestBody CustomerLoanRequest customerLoanRequest) {
-		customerLoanRequestImpl.addCustomerLoanRequest(customerLoanRequest);
-		return new ResponseEntity<>("Added", HttpStatus.OK);
+		icustomerloanrequestservice.addCustomerLoanRequest(customerLoanRequest);
+		return new ResponseEntity<>("Added", HttpStatus.CREATED);
 	}
 
-	@PutMapping("/{customerid}")
-	public ResponseEntity<String> updateloandetails(@PathVariable int customerid,
+	@PutMapping("/update/{id}")
+	public ResponseEntity<String> updateloandetails(@PathVariable int id,
 			@RequestBody CustomerLoanRequest customerLoanRequest) throws CustomerLoanRequestNotFoundException {
-		customerLoanRequestImpl.updateCustomerLoanRequest(customerid, customerLoanRequest);
+		icustomerloanrequestservice.updateCustomerLoanRequest(id, customerLoanRequest);
 		return new ResponseEntity<>("Updated", HttpStatus.OK);
 	}
 
-	@DeleteMapping("/{customerid}")
-	public ResponseEntity<String> deleteLoandetails(@PathVariable int customerid) {
-		customerLoanRequestImpl.deleteCustomerLoanRequest(customerid);
+	@DeleteMapping("/delete/{id}")
+	public ResponseEntity<String> deleteLoandetails(@PathVariable int id) {
+		icustomerloanrequestservice.deleteCustomerLoanRequest(id);
 		return new ResponseEntity<>("Deleted", HttpStatus.OK);
 	}
 
-	@GetMapping("/{customerid}")
-	public ResponseEntity<CustomerLoanRequest> findById(@PathVariable int customerid) {
-		CustomerLoanRequest clr = customerLoanRequestImpl.findById(customerid);
+	@GetMapping("/{id}")
+	public ResponseEntity<CustomerLoanRequest> findById(@PathVariable int id) {
+		CustomerLoanRequest clr = icustomerloanrequestservice.findById(id);
 		return new ResponseEntity<CustomerLoanRequest>(clr, HttpStatus.OK);
 	}
 
