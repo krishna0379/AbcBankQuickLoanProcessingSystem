@@ -1,7 +1,11 @@
 package com.capgemini.service;
 
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 
 import com.capgemini.entites.LoanProgram;
 import com.capgemini.exception.LoanNotFoundException;
@@ -50,6 +54,12 @@ public class ILoanServiceimpl implements ILoanService {
 		}
 		LoanProgram ls = loanprogramrepository.findById(id).get();
 		return ls;
+	}
+
+	@Override
+	public List<LoanProgram> findAll() {
+		// return loanprogramrepository.findAll();
+		return loanprogramrepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
 	}
 
 }

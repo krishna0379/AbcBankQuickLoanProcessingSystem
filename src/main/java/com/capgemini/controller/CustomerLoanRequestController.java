@@ -21,30 +21,30 @@ import com.capgemini.service.ICustomerLoanRequestService;
 public class CustomerLoanRequestController {
 
 	@Autowired
-	ICustomerLoanRequestService icustomerloanrequestservice;
+	ICustomerLoanRequestService iCustomerLoanRequestService;
 
 	@PostMapping("/addloandetails")
 	public ResponseEntity<String> createloandetails(@RequestBody CustomerLoanRequest customerLoanRequest) {
-		icustomerloanrequestservice.addCustomerLoanRequest(customerLoanRequest);
+		iCustomerLoanRequestService.addCustomerLoanRequest(customerLoanRequest);
 		return new ResponseEntity<>("Added", HttpStatus.CREATED);
 	}
 
 	@PutMapping("/update/{id}")
 	public ResponseEntity<String> updateloandetails(@PathVariable int id,
 			@RequestBody CustomerLoanRequest customerLoanRequest) throws CustomerLoanRequestNotFoundException {
-		icustomerloanrequestservice.updateCustomerLoanRequest(id, customerLoanRequest);
+		iCustomerLoanRequestService.updateCustomerLoanRequest(id, customerLoanRequest);
 		return new ResponseEntity<>("Updated", HttpStatus.OK);
 	}
 
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<String> deleteLoandetails(@PathVariable int id) {
-		icustomerloanrequestservice.deleteCustomerLoanRequest(id);
+		iCustomerLoanRequestService.deleteCustomerLoanRequest(id);
 		return new ResponseEntity<>("Deleted", HttpStatus.OK);
 	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<CustomerLoanRequest> findById(@PathVariable int id) {
-		CustomerLoanRequest clr = icustomerloanrequestservice.findById(id);
+		CustomerLoanRequest clr = iCustomerLoanRequestService.findById(id);
 		return new ResponseEntity<CustomerLoanRequest>(clr, HttpStatus.OK);
 	}
 

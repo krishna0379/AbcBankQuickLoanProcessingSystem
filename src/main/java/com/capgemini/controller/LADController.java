@@ -18,22 +18,22 @@ import com.capgemini.service.ICustomerLoanReport;
 @RequestMapping("api/lad/")
 public class LADController {
 	@Autowired
-	ICustomerLoanReport icustomerloanreport;
+	ICustomerLoanReport iCustomerLoanReport;
 
 	@GetMapping("/{id}")
 	public String checklad(@PathVariable int id) {
-		String s1 = icustomerloanreport.hello(id);
+		String s1 = iCustomerLoanReport.hello(id);
 		return s1;
 	}
 
 	@GetMapping("/allrecords")
 	public List<LoanStatus> allrecords() {
-		return icustomerloanreport.findallrecords();
+		return iCustomerLoanReport.findallrecords();
 	}
 
 	@DeleteMapping("{id}")
 	public ResponseEntity<String> deletelad(@PathVariable int id) {
-		String s1 = icustomerloanreport.deleteById(id);
+		String s1 = iCustomerLoanReport.deleteById(id);
 		// return s1;
 		return new ResponseEntity<>(s1, HttpStatus.OK);
 
