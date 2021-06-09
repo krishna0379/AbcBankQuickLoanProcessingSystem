@@ -58,8 +58,8 @@ public class ILoanServiceimpl implements ILoanService {
 
 	@Override
 	public List<LoanProgram> findAll() {
-		// return loanprogramrepository.findAll();
-		return loanprogramrepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
+		//return loanprogramrepository.findAll();
+		return loanprogramrepository.findAll(Sort.by(Sort.Direction.ASC, "loanId"));
 	}
 
 }
