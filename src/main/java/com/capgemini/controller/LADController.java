@@ -24,7 +24,7 @@ public class LADController {
 
 	@GetMapping("/{id}")
 	public String checklad(@PathVariable int id) {
-		String s1 = iCustomerLoanReport.hello(id);
+		String s1 = iCustomerLoanReport.lad(id);
 		return s1;
 	}
 

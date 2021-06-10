@@ -16,12 +16,13 @@ public class CustomerLoanRequest {
 	private double age;
 	private double annualIncome;
 	private String loanType;
-	private String name;
+	private String firstName;
+	private String lastName;
 	private String email;
 	private String mobile;
 	private String gender;
 	private String city;
-	private String state;
+	private String stateName;
 	private String panNumber;
 	private String nationality;
 	

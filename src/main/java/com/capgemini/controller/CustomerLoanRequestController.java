@@ -1,5 +1,7 @@
 package com.capgemini.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -48,6 +50,11 @@ public class CustomerLoanRequestController {
 	public ResponseEntity<CustomerLoanRequest> findById(@PathVariable int id) {
 		CustomerLoanRequest clr = iCustomerLoanRequestService.findById(id);
 		return new ResponseEntity<CustomerLoanRequest>(clr, HttpStatus.OK);
+	}
+	
+	@GetMapping("/allcustomerrecords")
+	public List<CustomerLoanRequest> allrecords() {
+		return iCustomerLoanRequestService.findallrecords();
 	}
 
 }

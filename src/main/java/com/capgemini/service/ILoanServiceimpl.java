@@ -15,24 +15,24 @@ import com.capgemini.repository.LoanProgramRepository;
 public class ILoanServiceimpl implements ILoanService {
 
 	@Autowired
-	LoanProgramRepository loanprogramrepository;
+	LoanProgramRepository loanProgramRepository;
 
 	@Override
 	public String addLoanDetails(LoanProgram loanprogram) {
-		loanprogramrepository.save(loanprogram);
+		loanProgramRepository.save(loanprogram);
 		return "Loan Details added !!";
 	}
 
 	@Override
 	public String updateLoanDetails(int loanid, LoanProgram loanprogram) {
-		if (!loanprogramrepository.existsById(loanid)) {
+		if (!loanProgramRepository.existsById(loanid)) {
 			throw new LoanNotFoundException("Check the id and Try again");
 		}
-		LoanProgram ld = loanprogramrepository.findById(loanid).get();
+		LoanProgram ld = loanProgramRepository.findById(loanid).get();
 		ld.setLoanType(loanprogram.getLoanType());
 		ld.setMaximumAge(loanprogram.getMaximumAge());
 		ld.setMinimumAge(loanprogram.getMinimumAge());
-		loanprogramrepository.save(ld);
+		loanProgramRepository.save(ld);
 
 		return "Loan details updated";
 
@@ -40,26 +40,26 @@ public class ILoanServiceimpl implements ILoanService {
 
 	@Override
 	public String deleteLoanDetails(int loanid) {
-		if (!loanprogramrepository.existsById(loanid)) {
+		if (!loanProgramRepository.existsById(loanid)) {
 			throw new LoanNotFoundException("The id is not available ");
 		}
-		loanprogramrepository.deleteById(loanid);
+		loanProgramRepository.deleteById(loanid);
 		return "Record deleted";
 	}
 
 	@Override
 	public LoanProgram findById(int id) {
-		if (!loanprogramrepository.existsById(id)) {
+		if (!loanProgramRepository.existsById(id)) {
 			throw new LoanNotFoundException(" Loan program Not Found");
 		}
-		LoanProgram ls = loanprogramrepository.findById(id).get();
+		LoanProgram ls = loanProgramRepository.findById(id).get();
 		return ls;
 	}
 
 	@Override
 	public List<LoanProgram> findAll() {
 		//return loanprogramrepository.findAll();
-		return loanprogramrepository.findAll(Sort.by(Sort.Direction.ASC, "loanId"));
+		return loanProgramRepository.findAll(Sort.by(Sort.Direction.ASC, "loanId"));
 	}
 
 }

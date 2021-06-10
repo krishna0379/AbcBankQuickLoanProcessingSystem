@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 
 import com.capgemini.entites.CustomerLoanRequest;
 import com.capgemini.entites.LoanStatus;
@@ -19,13 +20,13 @@ public class ICustomerLoanReportimpl implements ICustomerLoanReport {
 	CustomerLoanRequestRepository customerLoanRequestRepository;
 
 	@Autowired
-	LoanProgramRepository loanprogramRepository;
+	LoanProgramRepository loanProgramRepository;
 
 	@Autowired
-	LoanStatusRepository loanstatusRepository;
+	LoanStatusRepository loanStatusRepository;
 
 	@Override
-	public String hello(int id) {
+	public String lad(int id) {
 		if (!customerLoanRequestRepository.existsById(id)) {
 			throw new CustomerLoanRequestNotFoundException("Check the id and Try again");
 		}
@@ -182,7 +183,7 @@ public class ICustomerLoanReportimpl implements ICustomerLoanReport {
 		// end of personal loan
 
 		// start buisness loan logic
-		else if (ld.getLoanType().equals("business")) {
+		else if (ld.getLoanType().equals("bussiness")) {
 			if ((ld.getAge() > 20 || ld.getAge() <= 60) && (ld.getAnnualIncome() < 300000)) {
 				return "You are not eligible for loan";
 			} else {
@@ -247,7 +248,7 @@ public class ICustomerLoanReportimpl implements ICustomerLoanReport {
 		ls.setCustomerRefId(ld.getId());
 		ls.setEmi(emi);
 		ls.setLoanAmount(loanamount);
-		loanstatusRepository.save(ls);
+		loanStatusRepository.save(ls);
 
 		return "your loan amount is" + " " + Double.toString(loanamount) + "              " + "your tenure is" + " "
 				+ Double.toString(tenure) + "years" + "     " + " your emi is " + "   " + Double.toString(emi);
@@ -256,12 +257,13 @@ public class ICustomerLoanReportimpl implements ICustomerLoanReport {
 
 	@Override
 	public List<LoanStatus> findallrecords() {
-		return loanstatusRepository.findAll();
+		//return loanStatusRepository.findAll();
+		return loanStatusRepository.findAll(Sort.by(Sort.Direction.ASC, "loanId"));
 	}
 
 	@Override
 	public String deleteById(int id) {
-		loanstatusRepository.deleteById(id);
+		loanStatusRepository.deleteById(id);
 		return "LoanStatus is Deleted Sucessfully";
 	}
 

@@ -1,5 +1,7 @@
 package com.capgemini.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,16 +28,18 @@ public class CustomerLoanRequestImpl implements ICustomerLoanRequestService {
 		}
 
 		CustomerLoanRequest ld = customerLoanRequestRepository.findById(id).get();
+
+		ld.setMobile(customerLoanRequest.getMobile());
+		ld.setAnnualIncome(customerLoanRequest.getAnnualIncome());
+		ld.setAge(customerLoanRequest.getAge());
+		ld.setCity(customerLoanRequest.getCity());
+		ld.setStateName(customerLoanRequest.getStateName());
+		ld.setEmail(customerLoanRequest.getEmail());
+
 		/*
-		 * ld.setCustomerid(customerLoanRequest.getCustomerid());
-		 * ld.setLoantype(customerLoanRequest.getLoantype());
-		 * ld.setMobile(customerLoanRequest.getMobile());
-		 * ld.setAnnualincome(customerLoanRequest.getAnnualincome());
-		 * ld.setName(customerLoanRequest.getName());
+		 * if (customerLoanRequest.getCity() != null) {
+		 * ld.setCity(customerLoanRequest.getCity()); }
 		 */
-		if (customerLoanRequest.getCity() != null) {
-			ld.setCity(customerLoanRequest.getCity());
-		}
 		customerLoanRequestRepository.save(ld);
 
 		return "Customer Details Added";
@@ -57,6 +61,11 @@ public class CustomerLoanRequestImpl implements ICustomerLoanRequestService {
 		}
 		CustomerLoanRequest cLR = customerLoanRequestRepository.findById(id).get();
 		return cLR;
+	}
+
+	@Override
+	public List<CustomerLoanRequest> findallrecords() {
+		return customerLoanRequestRepository.findAll();
 	}
 
 }
